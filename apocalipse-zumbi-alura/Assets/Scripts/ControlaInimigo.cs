@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ControlaInimigo : MonoBehaviour {
+public class ControlaInimigo : MonoBehaviour
+{
 
     public GameObject Jogador;
     public float Velocidade = 5;
     private Rigidbody rigidbodyInimigo;
     private Animator animatorInimigo;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Jogador = GameObject.FindWithTag("Jogador");
         int geraTipoZumbi = Random.Range(1, 28);
         transform.GetChild(geraTipoZumbi).gameObject.SetActive(true);
@@ -18,11 +18,12 @@ public class ControlaInimigo : MonoBehaviour {
         animatorInimigo = GetComponent<Animator>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void FixedUpdate()
     {
@@ -47,10 +48,11 @@ public class ControlaInimigo : MonoBehaviour {
         }
     }
 
-    void AtacaJogador ()
+    void AtacaJogador()
     {
-        Time.timeScale = 0;
-        Jogador.GetComponent<ControlaJogador>().TextoGameOver.SetActive(true);
-        Jogador.GetComponent<ControlaJogador>().Vivo = false;
+        Jogador.GetComponent<ControlaJogador>().TomarDano();
+        //Time.timeScale = 0;
+        //Jogador.GetComponent<ControlaJogador>().TextoGameOver.SetActive(true);
+        //Jogador.GetComponent<ControlaJogador>().Vivo = false;
     }
 }

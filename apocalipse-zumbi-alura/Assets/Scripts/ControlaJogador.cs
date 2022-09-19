@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ControlaJogador : MonoBehaviour
@@ -10,6 +8,7 @@ public class ControlaJogador : MonoBehaviour
     private Vector3 direcao;
     public LayerMask MascaraChao;
     public GameObject TextoGameOver;
+    public int Vida = 100;
     public bool Vivo = true;
     private Rigidbody rigidbodyJogador;
     private Animator animatorJogador;
@@ -39,9 +38,9 @@ public class ControlaJogador : MonoBehaviour
             animatorJogador.SetBool("Movendo", false);
         }
 
-        if(Vivo == false)
+        if (Vivo == false)
         {
-            if(Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1"))
             {
                 SceneManager.LoadScene("game");
             }
@@ -59,7 +58,7 @@ public class ControlaJogador : MonoBehaviour
 
         RaycastHit impacto;
 
-        if(Physics.Raycast(raio, out impacto, 100, MascaraChao))
+        if (Physics.Raycast(raio, out impacto, 100, MascaraChao))
         {
             Vector3 posicaoMiraJogador = impacto.point - transform.position;
 
@@ -69,5 +68,10 @@ public class ControlaJogador : MonoBehaviour
 
             rigidbodyJogador.MoveRotation(novaRotacao);
         }
+    }
+
+    public void TomarDano()
+    {
+        Vida -= 30;
     }
 }
