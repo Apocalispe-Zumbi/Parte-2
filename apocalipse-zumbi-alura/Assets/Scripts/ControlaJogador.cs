@@ -12,6 +12,8 @@ public class ControlaJogador : MonoBehaviour
     private Rigidbody rigidbodyJogador;
     private Animator animatorJogador;
     public ControlaInterface scriptControlaInterface;
+    public AudioClip SomDeDano;
+
 
     private void Start()
     {
@@ -74,6 +76,8 @@ public class ControlaJogador : MonoBehaviour
     {
         Vida -= dano;
         scriptControlaInterface.AtualizarSliderVidaJogador();
+        ControlaAudio.instancia.PlayOneShot(SomDeDano);
+
         if (Vida < 0)
         {
             Time.timeScale = 0;

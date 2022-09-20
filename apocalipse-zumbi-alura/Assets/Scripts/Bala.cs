@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Bala : MonoBehaviour {
+public class Bala : MonoBehaviour
+{
 
     public float Velocidade = 20;
     private Rigidbody rigidbodyBala;
+    public AudioClip SomDeMorte;
+
 
     private void Start()
     {
@@ -13,17 +14,19 @@ public class Bala : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate()
+    {
         rigidbodyBala.MovePosition
-            (rigidbodyBala.position + 
+            (rigidbodyBala.position +
             transform.forward * Velocidade * Time.deltaTime);
-	}
+    }
 
     void OnTriggerEnter(Collider objetoDeColisao)
     {
-        if(objetoDeColisao.tag == "Inimigo")
+        if (objetoDeColisao.tag == "Inimigo")
         {
             Destroy(objetoDeColisao.gameObject);
+            ControlaAudio.instancia.PlayOneShot(SomDeMorte);
         }
 
         Destroy(gameObject);
